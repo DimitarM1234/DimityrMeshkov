@@ -12,7 +12,6 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    // Rule: title cannot be empty, ISBN must be unique
     public void addBook(Book book) {
         if (book.getTitle() == null || book.getTitle().isBlank()) {
             throw new IllegalArgumentException("Book title cannot be empty");
@@ -38,7 +37,6 @@ public class BookService {
         return book;
     }
 
-    // Edit book info (ISBN is used to find the book, so it stays the same)
     public void editBook(String isbn, String newTitle, String newAuthor, int newYear) {
         Book book = bookRepository.findByIsbn(isbn);
         if (book == null) {
@@ -51,8 +49,7 @@ public class BookService {
         book.setAuthor(newAuthor);
         book.setYear(newYear);
     }
-
-    // Rule: cannot delete a borrowed book
+    
     public void deleteBook(String isbn) {
         if (bookRepository.existsByIsbn(isbn) == false) {
             throw new IllegalArgumentException("Book not found");

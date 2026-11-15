@@ -20,7 +20,6 @@ public class LoanService {
         this.studentRepository = studentRepository;
     }
 
-    // Finds the student by email. If there is no such student, creates a new one.
     public Student getOrCreateStudent(String firstName, String lastName, String email) {
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("Student email cannot be empty");
@@ -43,11 +42,9 @@ public class LoanService {
         if (book == null) {
             throw new IllegalArgumentException("Book not found");
         }
-        // Rule: cannot borrow a book that is already borrowed
         if (bookRepository.isAvailableByIsbn(isbn) == false) {
             throw new IllegalStateException("Book is already borrowed");
         }
-        // Rule: max 3 unreturned books per student
         if (loanRepository.countActiveByStudent(student) >= MAX_LOANS) {
             throw new IllegalStateException("Student already has " + MAX_LOANS + " unreturned books");
         }
@@ -55,7 +52,6 @@ public class LoanService {
         bookRepository.markBorrowedByIsbn(isbn);
     }
 
-    // Rule: after return the book is available again
     public void returnBook(Student student, String isbn) {
         Book book = bookRepository.findByIsbn(isbn);
         if (book == null) {
