@@ -49,7 +49,7 @@ public class BookService {
         book.setAuthor(newAuthor);
         book.setYear(newYear);
     }
-    
+
     public void deleteBook(String isbn) {
         if (bookRepository.existsByIsbn(isbn) == false) {
             throw new IllegalArgumentException("Book not found");

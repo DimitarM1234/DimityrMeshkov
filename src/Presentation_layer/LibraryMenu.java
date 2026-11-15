@@ -154,9 +154,9 @@ public class LibraryMenu {
     private Student readStudent() {
         System.out.println("Student email:");
         String email = sc.nextLine();
-        System.out.println("Student first name (only needed for a new student):");
+        System.out.println("Student first name:");
         String firstName = sc.nextLine();
-        System.out.println("Student last name (only needed for a new student):");
+        System.out.println("Student last name:");
         String lastName = sc.nextLine();
         return loanService.getOrCreateStudent(firstName, lastName, email);
     }
