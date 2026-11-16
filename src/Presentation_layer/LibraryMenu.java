@@ -6,17 +6,14 @@ import Data_access_layer.models.Book;
 import Data_access_layer.models.Student;
 import java.util.List;
 import java.util.Scanner;
-
 public class LibraryMenu {
     Scanner sc = new Scanner(System.in);
-    private final BookService bookService;
-    private final LoanService loanService;
-
+    private BookService bookService;
+    private LoanService loanService;
     public LibraryMenu(BookService bookService, LoanService loanService) {
         this.bookService = bookService;
         this.loanService = loanService;
     }
-
     public void start() {
         int option = -1;
         while (option != 0) {
@@ -74,7 +71,6 @@ public class LibraryMenu {
             }
         }
     }
-
     private void addBook() {
         System.out.println("Title:");
         String title = sc.nextLine();
@@ -87,7 +83,6 @@ public class LibraryMenu {
         bookService.addBook(new Book(title, author, year, isbn));
         System.out.println("Book added");
     }
-
     private void showAllBooks() {
         List<Book> books = bookService.getAllBooks();
         if (books.isEmpty()) {
@@ -97,14 +92,12 @@ public class LibraryMenu {
             printBookWithStatus(book);
         }
     }
-
     private void searchBook() {
         System.out.println("Title:");
         String title = sc.nextLine();
         Book book = bookService.searchByTitle(title);
         printBookWithStatus(book);
     }
-
     private void editBook() {
         System.out.println("ISBN of the book to edit:");
         String isbn = sc.nextLine();
@@ -117,14 +110,12 @@ public class LibraryMenu {
         bookService.editBook(isbn, title, author, year);
         System.out.println("Book edited");
     }
-
     private void deleteBook() {
         System.out.println("ISBN of the book to delete:");
         String isbn = sc.nextLine();
         bookService.deleteBook(isbn);
         System.out.println("Book deleted");
     }
-
     private void borrowBook() {
         Student student = readStudent();
         System.out.println("ISBN of the book:");
@@ -132,7 +123,6 @@ public class LibraryMenu {
         loanService.borrowBook(student, isbn);
         System.out.println("Book borrowed");
     }
-
     private void returnBook() {
         Student student = readStudent();
         System.out.println("ISBN of the book:");
@@ -140,7 +130,6 @@ public class LibraryMenu {
         loanService.returnBook(student, isbn);
         System.out.println("Book returned");
     }
-
     private void showAvailableBooks() {
         List<Book> books = bookService.getAvailableBooks();
         if (books.isEmpty()) {
@@ -150,7 +139,6 @@ public class LibraryMenu {
             System.out.println(book);
         }
     }
-
     private Student readStudent() {
         System.out.println("Student email:");
         String email = sc.nextLine();
@@ -160,7 +148,6 @@ public class LibraryMenu {
         String lastName = sc.nextLine();
         return loanService.getOrCreateStudent(firstName, lastName, email);
     }
-
     private void printBookWithStatus(Book book) {
         if (bookService.isAvailable(book.getIsbn()) == true) {
             System.out.println(book + " - AVAILABLE");

@@ -3,9 +3,9 @@ package Data_access_layer.models;
 import java.time.LocalDate;
 
 public class Loan {
-    private final Book book;
-    private final Student student;
-    private final LocalDate borrowDate;
+    private Book book;
+    private Student student;
+    private LocalDate borrowDate;
     private LocalDate returnDate;
     public Loan(Book book, Student student) {
         this.book = book;

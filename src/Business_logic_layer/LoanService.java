@@ -6,14 +6,11 @@ import Data_access_layer.models.Student;
 import Data_access_layer.repo.BookRepository;
 import Data_access_layer.repo.LoanRepository;
 import Data_access_layer.repo.StudentRepository;
-
 public class LoanService {
-    private static final int MAX_LOANS = 3;
-
-    private final BookRepository bookRepository;
-    private final LoanRepository loanRepository;
-    private final StudentRepository studentRepository;
-
+    private static int MAX_LOANS = 3;
+    private BookRepository bookRepository;
+    private LoanRepository loanRepository;
+    private StudentRepository studentRepository;
     public LoanService(BookRepository bookRepository, LoanRepository loanRepository, StudentRepository studentRepository) {
         this.bookRepository = bookRepository;
         this.loanRepository = loanRepository;

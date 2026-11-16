@@ -4,14 +4,11 @@ import Data_access_layer.models.Book;
 import Data_access_layer.repo.BookRepository;
 import java.util.ArrayList;
 import java.util.List;
-
 public class BookService {
-    private final BookRepository bookRepository;
-
+    private BookRepository bookRepository;
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-
     public void addBook(Book book) {
         if (book.getTitle() == null || book.getTitle().isBlank()) {
             throw new IllegalArgumentException("Book title cannot be empty");
